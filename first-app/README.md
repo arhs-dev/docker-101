@@ -87,3 +87,53 @@ ENTRYPOINT ["java","-jar","/usr/app/app.jar"]
   - The `RUN` instruction executes an arbitrary command inside the command inside the container.
   - The `COPY` instruction is a bit different now, it tells docker to copy a resource from a build stage labeled 'build' instead of the context (the directory we build docker image). Another already built image can be used to copy resources from.
 ``` 
+
+## Sharing the Image
+
+The image you just created exists only on the machine that performed the build. So, if we want to share the image, we need to push it to a registry. Think of a registry as a code repo. It's sole purpose is to share container images.
+
+1. In order to push to Docker Hub, we need to authenticate. Do this by running:
+
+    ```
+    docker login
+    ```
+
+2. All images (except Official Images) in Docker Hub are namespaced. For example, if I push images, they aren't going to simply named `first-app`, as it doesn't convey _who_ it comes from, but creates a nightmare trying to ensure my image doesn't collide with yours. To fix this, my image would be named `arhsdev/first-app`. Using the `docker tag` command, we can provide another name for the image we built earlier.
+
+    ```
+    # Replace arhsdev with your Docker Hub username
+    docker tag first-app arhsdev/first-app
+    ```
+
+3. Now that we're authenticated and we have our image tagged correctly, let's push it!
+
+    ```
+    # Replace first-app with your Docker Hub username
+    docker push arhsdev/first-app
+    ```
+
+## Running our Image
+
+With Play with docker, it's easy to get a new instance. With it being a new instance, the only way our app can run is if we pull the image.
+
+1. Click the 'Create Instance' button in the left navigation menu. If you are using a local installation just delete the local image
+
+```
+docker rmi arhsdev/first-app
+```
+
+2. In the terminal for our new instance, run the following:
+
+    ```
+    # Replace arhsdev with your Docker Hub username
+    docker run -p 8080:8080 -d arhsdev/first-app
+    ```
+
+    We'll see the image get pulled from Docker Hub and start up. Magic, huh?
+
+3. Run 
+```
+curl localhost:8080/hello
+```
+and see the app working!
+
