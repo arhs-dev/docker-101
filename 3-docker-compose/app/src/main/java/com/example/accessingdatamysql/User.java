@@ -15,6 +15,16 @@ public class User {
 
 	private String email;
 
+	//--
+	//-- constructors
+	public User() {/*for JPA*/}
+
+	public User(String name, String email){
+		this.name = name;
+		this.email = email;
+	}
+
+	//--
 	public Integer getId() {
 		return id;
 	}
@@ -39,5 +49,12 @@ public class User {
 		this.email = email;
 	}
 
-
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", email='" + email + '\'' +
+				'}';
+	}
 }
