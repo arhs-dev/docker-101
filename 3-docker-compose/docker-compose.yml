@@ -2,9 +2,13 @@ version: "3"
 
 services: 
   app:
-    image: arhsdev/app
+    build: app
     ports:
       - 8080:8080
+    environment:
+      - MYSQL_HOST=mysql
+    depends_on:
+      - mysql
 
   mysql:
     image: mysql
@@ -17,4 +21,5 @@ services:
       - MYSQL_PASSWORD=ThePassword
       - MYSQL_DATABASE=db_example
       - MYSQL_ROOT_PASSWORD=root
-
+    volumes:
+      - "./conf.d:/etc/mysql/conf.d:ro"
