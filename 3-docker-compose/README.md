@@ -32,7 +32,7 @@ ENTRYPOINT ["java","-jar","/usr/app/app.jar"]
 
 ## Connecting to the database
 
-1. Docker compose provides a way to declare service dependencies. Open `docker-compose.yml` and add declare that the `app` service depends on `mysql`. You declare that in `app` section right under `ports` mapping
+1. Docker compose provides a way to declare service dependencies. Open `docker-compose.yml` and declare that the `app` service depends on `mysql`. You set that in `app` section right under `ports` mapping
 
 ```
     depends_on:
@@ -56,5 +56,36 @@ Open `docker-compose.yml` and add it in `app` section right under `depends_on` p
 
 5. Verify that the applicaiton is running 
 ```
-curl localhost:8080/demo/all
+curl localhost:8080/demo/all | jq
 ```
+should return a list of prepopulated users 
+
+```
+[
+  {
+    "id": 1,
+    "name": "Jack Bauer",
+    "email": "jack@ctu.gov.us"
+  },
+  {
+    "id": 2,
+    "name": "Chloe O'Brian",
+    "email": "cloe@ctu.gov.us"
+  },
+  {
+    "id": 3,
+    "name": "Kim Bauer",
+    "email": "kim@ctu.gov.us"
+  },
+  {
+    "id": 4,
+    "name": "David Palmer",
+    "email": "palmer@usa.gov"
+  },
+  {
+    "id": 5,
+    "name": "Michelle Dessler",
+    "email": "michelle@ctu.gov.us"
+  }
+]
+``` 
