@@ -2,7 +2,7 @@
 
 In the workshop, we talked about creating a basic multi-service application. But, the final compose file wasn't _quite_ ready to run an application. The application is a typical spring-boot application that used JPA to access a MY_SQL database.
 
-1. In the workshop directory, create a new `Dockerfile`. In it, place the following (just like in out first excercise):
+1. In the workshop `app` directory, create a new `Dockerfile`. In it, place the following (just like in our first excercise) to create a multi-stage docker build:
 
 ```
 FROM maven:3 AS build
@@ -16,7 +16,7 @@ EXPOSE 8080
 ENTRYPOINT ["java","-jar","/usr/app/app.jar"]    
 ```
 
-2. Update the compose file to use this image to add the `build` instruction:
+2. Update the compose file and add the `build` instruction:
 
     ```
     services:
