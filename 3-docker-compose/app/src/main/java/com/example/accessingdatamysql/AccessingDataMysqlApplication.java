@@ -18,7 +18,7 @@ public class AccessingDataMysqlApplication {
 
 	@Bean
 	public CommandLineRunner demo(UserRepository repository) {
-		return (args) -> {
+		return args -> {
 			// save a few customers
 			repository.save(new User("Jack Bauer", "jack@ctu.gov.us"));
 			repository.save(new User("Chloe O'Brian", "cloe@ctu.gov.us"));
