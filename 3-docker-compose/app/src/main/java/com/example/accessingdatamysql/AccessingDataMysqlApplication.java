@@ -27,7 +27,7 @@ public class AccessingDataMysqlApplication {
 			repository.save(new User("Michelle Dessler", "michelle@ctu.gov.us"));
 
 			// fetch all customers
-			log.info("Customers found with findAll():");
+			log.info("Users found with findAll():");
 			log.info("-------------------------------");
 			for (User user : repository.findAll()) {
 				log.info(user.toString());
